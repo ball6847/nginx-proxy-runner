@@ -13,6 +13,11 @@ if [ ! -f "$PWD/proxy.conf" ]; then
     exit 1
 fi
 
+# override with local config
+if [[ -f "$PWD/config" ]]; then
+  source $PWD/config
+fi
+
 if [[ "`docker ps -aq --filter="name=$CONTAINER"`" != "" ]]; then
   echo "Removing existing $CONTAINER container."
   docker rm -f $CONTAINER > /dev/null
