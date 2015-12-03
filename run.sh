@@ -1,7 +1,7 @@
 #!/bin/bash
 
 CONTAINER=nginx-proxy
-START_WITH_DOCKER=false
+START_WITH_DOCKER=true
 
 # ------------------------------------------------------
 
@@ -13,15 +13,11 @@ if [ ! -f "$PWD/proxy.conf" ]; then
     exit 1
 fi
 
-# override with local config
-if [[ -f "$PWD/config" ]]; then
-  source $PWD/config
-fi
-
 if [[ "`docker ps -aq --filter="name=$CONTAINER"`" != "" ]]; then
   echo "Removing existing $CONTAINER container."
   docker rm -f $CONTAINER > /dev/null
 fi
+
 if [[ "$START_WITH_DOCKER" = true ]]; then
   START_WITH_DOCKER_CMD="--restart=always"
 fi
