@@ -1,0 +1,10 @@
+nginx-proxy:
+    image: ball6847/nginx-proxy
+    container_name: nginx-proxy
+    restart: always
+    ports:
+        - 80:80
+    volumes:
+        - /etc/localtime:/etc/localtime:ro
+        - /var/run/docker.sock:/var/run/docker.sock:ro
+        - ./proxy.conf:/proxy.conf
